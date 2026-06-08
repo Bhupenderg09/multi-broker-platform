@@ -1,10 +1,10 @@
-
 services:
   api:
     build:
       context: .
       dockerfile: apps/api/Dockerfile
     container_name: multi-broker-api
+    restart: unless-stopped
     working_dir: /app
     command: npm run dev:api
     env_file:
@@ -17,6 +17,7 @@ services:
       context: .
       dockerfile: apps/web/Dockerfile
     container_name: multi-broker-web
+    restart: unless-stopped
     working_dir: /app
     command: npm run dev:web
     env_file:
