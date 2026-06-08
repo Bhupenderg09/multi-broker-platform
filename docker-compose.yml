@@ -1,0 +1,27 @@
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: apps/api/Dockerfile
+    container_name: multi-broker-api
+    working_dir: /app
+    command: npm run dev:api
+    env_file:
+      - .env
+    ports:
+      - "8787:8787"
+
+  web:
+    build:
+      context: .
+      dockerfile: apps/web/Dockerfile
+    container_name: multi-broker-web
+    working_dir: /app
+    command: npm run dev:web
+    env_file:
+      - .env
+    ports:
+      - "3000:3000"
+    depends_on:
+      - api
